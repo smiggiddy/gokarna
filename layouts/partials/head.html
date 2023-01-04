@@ -26,7 +26,7 @@
     <meta property="og:description" content="{{ $description }}">
     <meta property="og:image" content="{{ $image }}">
 
-    <meta name="twitter:card" content="{{ $image }}">
+    <meta name="twitter:card" content="summary_image_large">
     <meta name="twitter:title" content="{{ $title }}">
     <meta name="twitter:description" content="{{ $description }}">
     <meta property="twitter:domain" content="{{ .Permalink }}">
@@ -48,4 +48,7 @@
     {{ if .Site.Params.CustomHeadHTML }}
     {{ .Site.Params.CustomHeadHTML | safeHTML }}
     {{ end }}
+
+    <!-- add go-html-template for twitter card -->
+    {{ template "_internal/twitter_cards.html" . }}
 </head>
