@@ -1,4 +1,14 @@
 <footer class="footer">
     <span>&copy; {{ now.Year }} {{ .Site.Params.Footer}}</span>
-
+    <section class="social-icons">
+        <ul class="social-icons-list">
+            {{ range .Site.Params.SocialIcons }}
+            <li class="social-icon">
+                <a href="{{ .url }}">
+                    <img class="svg-inject" src="{{ $.Site.BaseURL }}/icons/{{ .name }}.svg" />
+                </a>
+            </li>
+            {{ end }}
+        </ul>
+    </section>
 </footer>
