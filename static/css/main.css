@@ -2,31 +2,81 @@
   --content-width: 1120px;
   --container-width: 810px;
 
+  /* Light mode colors */
   --light-primary-color: 255, 255, 255;
-  --light-secondary-color: #dddddd;
-  --light-tertiary-color: #272822;
-  --light-text-color: black;
+  --light-secondary-color: #e5e7eb;  /* Modern gray */
+  --light-tertiary-color: #374151;   /* Darker gray */
+  --light-text-color: #111827;       /* Almost black */
+  --light-gray-100: #f9fafb;
+  --light-gray-200: #f3f4f6;
+  --light-gray-300: #e5e7eb;
+  --light-gray-400: #d1d5db;
+  --light-gray-500: #9ca3af;
+  --light-gray-600: #6b7280;
+  --light-gray-700: #4b5563;
+  --light-gray-800: #374151;
+  --light-gray-900: #1f2937;
+
+  /* Modern accent color options - choose one */
+  /* Blue theme */
+  --accent-blue: #3b82f6;
+  --accent-blue-hover: #2563eb;
+  
+  /* Purple theme */
+  --accent-purple: #8b5cf6;
+  --accent-purple-hover: #7c3aed;
+  
+  /* Green theme */
+  --accent-green: #10b981;
+  --accent-green-hover: #059669;
+  
+  /* Orange theme */
+  --accent-orange: #f97316;
+  --accent-orange-hover: #ea580c;
+  
+  /* Pink theme */
+  --accent-pink: #ec4899;
+  --accent-pink-hover: #db2777;
+  
+  /* Teal theme */
+  --accent-teal: #14b8a6;
+  --accent-teal-hover: #0d9488;
 }
 
 @font-face {
-  font-family: Lato;
+  font-family: Inter;
   font-weight: 400;
-  src: url("/fonts/Lato-Regular.ttf");
+  src: url("/fonts/Inter-Regular.ttf");
 }
 
 @font-face {
-  font-family: Lato;
+  font-family: Inter;
+  font-weight: 500;
+  src: url("/fonts/Inter-Medium.ttf");
+}
+
+@font-face {
+  font-family: Inter;
+  font-weight: 600;
+  src: url("/fonts/Inter-SemiBold.ttf");
+}
+
+@font-face {
+  font-family: Inter;
   font-weight: 700;
-  src: url("/fonts/Lato-Bold.ttf");
+  src: url("/fonts/Inter-Bold.ttf");
 }
 
 html {
   background-color: rgb(var(--light-primary-color));
   color: var(--light-text-color);
-  font-family: "Lato", sans-serif;
-  font-size: 17.5px;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
   min-height: 100%;
   position: relative;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
@@ -43,9 +93,13 @@ a {
 }
 
 /* This is set in partials/head.html and is populated via config */
+a {
+  transition: color 0.2s ease;
+}
+
 a:hover {
-  color: var(--accent-color);
-  fill: var(--accent-color);
+  color: var(--accent-color-hover, var(--accent-color));
+  fill: var(--accent-color-hover, var(--accent-color));
 }
 
 main#content {

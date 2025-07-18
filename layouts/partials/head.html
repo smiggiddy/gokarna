@@ -4,7 +4,29 @@
 
     <style>
         :root {
-            --accent-color: {{ .Site.Params.AccentColor | default "#FF4D4D" }};
+            {{ $accentColor := .Site.Params.AccentColor | default "blue" }}
+            {{ if eq $accentColor "blue" }}
+            --accent-color: var(--accent-blue);
+            --accent-color-hover: var(--accent-blue-hover);
+            {{ else if eq $accentColor "purple" }}
+            --accent-color: var(--accent-purple);
+            --accent-color-hover: var(--accent-purple-hover);
+            {{ else if eq $accentColor "green" }}
+            --accent-color: var(--accent-green);
+            --accent-color-hover: var(--accent-green-hover);
+            {{ else if eq $accentColor "orange" }}
+            --accent-color: var(--accent-orange);
+            --accent-color-hover: var(--accent-orange-hover);
+            {{ else if eq $accentColor "pink" }}
+            --accent-color: var(--accent-pink);
+            --accent-color-hover: var(--accent-pink-hover);
+            {{ else if eq $accentColor "teal" }}
+            --accent-color: var(--accent-teal);
+            --accent-color-hover: var(--accent-teal-hover);
+            {{ else }}
+            --accent-color: {{ $accentColor }};
+            --accent-color-hover: {{ $accentColor }};
+            {{ end }}
         }
     </style>
 
