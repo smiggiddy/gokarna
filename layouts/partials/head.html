@@ -69,6 +69,9 @@
     <script async src="https://unami.smigz.com/script.js" data-website-id="639ef180-9826-4675-be7b-4bdd2140aaf8"></script>
 
 
+    <!-- Structured Data for SEO -->
+    {{- partial "structured-data.html" . -}}
+
     <!-- Option for user to inject custom html -->
     {{ if .Site.Params.CustomHeadHTML }}
     {{ .Site.Params.CustomHeadHTML | safeHTML }}

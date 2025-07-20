@@ -1,0 +1,98 @@
+{{ if eq .Type "post" }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "{{ .Title }}",
+  "description": "{{ .Description }}",
+  "image": {{ if .Params.image }}"{{ .Params.image | absURL }}"{{ else }}"{{ .Site.Params.avatarURL | absURL }}"{{ end }},
+  "author": {
+    "@type": "Person",
+    "name": "{{ .Site.Title }}"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "{{ .Site.Title }}",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ .Site.Params.avatarURL | absURL }}"
+    }
+  },
+  "datePublished": "{{ .Date.Format "2006-01-02T15:04:05-07:00" }}",
+  "dateModified": "{{ .Lastmod.Format "2006-01-02T15:04:05-07:00" }}",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ .Permalink }}"
+  },
+  {{ if .Params.prerequisites }}
+  "isBasedOn": [
+    {{ range $index, $prereq := .Params.prerequisites }}
+    {{ if $index }},{{ end }}
+    {
+      "@type": "Article",
+      "name": "{{ $prereq.title }}",
+      "url": "{{ $prereq.url | absURL }}"
+    }
+    {{ end }}
+  ],
+  {{ end }}
+  {{ if .Params.next_steps }}
+  "hasPart": [
+    {{ range $index, $next := .Params.next_steps }}
+    {{ if $index }},{{ end }}
+    {
+      "@type": "Article", 
+      "name": "{{ $next.title }}",
+      "url": "{{ $next.url | absURL }}"
+    }
+    {{ end }}
+  ],
+  {{ end }}
+  "keywords": [{{ range $index, $tag := .Params.tags }}{{ if $index }},{{ end }}"{{ $tag }}"{{ end }}],
+  "articleSection": "{{ .Section }}",
+  "inLanguage": "{{ .Site.LanguageCode }}"
+}
+</script>
+
+{{ if or .Params.prerequisites .Params.next_steps .Params.related_posts }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "{{ .Title }} - Related Content",
+  "description": "Articles related to {{ .Title }}",
+  "itemListElement": [
+    {{ $items := slice }}
+    {{ if .Params.prerequisites }}
+      {{ range .Params.prerequisites }}
+        {{ $items = $items | append . }}
+      {{ end }}
+    {{ end }}
+    {{ if .Params.next_steps }}
+      {{ range .Params.next_steps }}
+        {{ $items = $items | append . }}
+      {{ end }}
+    {{ end }}
+    {{ if .Params.related_posts }}
+      {{ range .Params.related_posts }}
+        {{ $items = $items | append . }}
+      {{ end }}
+    {{ end }}
+    {{ range $index, $item := $items }}
+    {{ if $index }},{{ end }}
+    {
+      "@type": "ListItem",
+      "position": {{ add $index 1 }},
+      "item": {
+        "@type": "Article",
+        "name": "{{ $item.title }}",
+        "description": "{{ $item.description }}",
+        "url": "{{ $item.url | absURL }}"
+      }
+    }
+    {{ end }}
+  ]
+}
+</script>
+{{ end }}
+{{ end }}

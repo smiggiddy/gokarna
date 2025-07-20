@@ -1,0 +1,74 @@
+{{- $url := .Get "url" -}}
+{{- $title := .Get "title" -}}
+{{- $description := .Get "description" -}}
+{{- $style := .Get "style" | default "inline" -}}
+
+{{- if eq $style "card" -}}
+<div class="related-link-card">
+    <h4><a href="{{ $url }}">{{ $title }}</a></h4>
+    {{- if $description -}}<p>{{ $description }}</p>{{- end -}}
+</div>
+{{- else if eq $style "box" -}}
+<div class="related-link-box">
+    <span class="link-icon">🔗</span>
+    <a href="{{ $url }}">{{ $title }}</a>
+    {{- if $description -}}<span class="link-desc"> - {{ $description }}</span>{{- end -}}
+</div>
+{{- else -}}
+<a href="{{ $url }}" class="related-link">{{ $title }}</a>
+{{- end -}}
+
+<style>
+.related-link-card {
+    background: rgba(255, 77, 77, 0.08);
+    border: 1px solid rgba(255, 77, 77, 0.2);
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.related-link-card h4 {
+    margin: 0 0 0.5rem 0;
+    color: var(--accent-color, #FF4D4D);
+}
+
+.related-link-card a {
+    text-decoration: none;
+    color: var(--accent-color, #FF4D4D);
+}
+
+.related-link-card p {
+    margin: 0;
+    color: var(--text-color);
+    font-size: 0.9rem;
+}
+
+.related-link-box {
+    display: inline-block;
+    background: rgba(255, 77, 77, 0.1);
+    border-radius: 4px;
+    padding: 0.3rem 0.6rem;
+    margin: 0.2rem;
+    border-left: 3px solid var(--accent-color, #FF4D4D);
+}
+
+.related-link-box .link-icon {
+    margin-right: 0.3rem;
+}
+
+.related-link-box a {
+    font-weight: bold;
+    text-decoration: none;
+    color: var(--accent-color, #FF4D4D);
+}
+
+.related-link-box .link-desc {
+    color: var(--text-color);
+    font-size: 0.9rem;
+}
+
+.related-link {
+    color: var(--accent-color, #FF4D4D);
+    font-weight: bold;
+}
+</style>
